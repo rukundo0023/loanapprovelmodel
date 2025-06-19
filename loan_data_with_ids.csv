@@ -1,0 +1,9 @@
+applicant_id,full_name,age,income,job_type,credit_score,marital_status,education_level,approved,job_type_encoded,marital_status_encoded,education_level_encoded
+101,Alice Smith,25,50000,Salaried,0.65,Single,Bachelor,0,0,2,0
+102,Bob Johnson,45,120000,Self-Employed,0.9,Married,Master,1,1,1,2
+103,Carol Lee,35,75000,Unemployed,0.55,Divorced,High School,0,2,0,1
+104,David Kim,50,130000,Salaried,0.92,Married,PhD,1,0,1,4
+105,Eva Chen,29,40000,Salaried,0.45,Single,High School,0,0,2,1
+106,Frank Brown,42,95000,Unemployed,0.6,Widowed,Other,0,2,3,3
+107,Grace Park,38,80000,Self-Employed,0.75,Divorced,Master,1,1,0,2
+108,Henry Adams,60,110000,Salaried,0.88,Married,Bachelor,1,0,1,0

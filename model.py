@@ -3,8 +3,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 import joblib
 
-# 1. Create synthetic dataset
+# 1. Create synthetic dataset with full names and IDs
 data = pd.DataFrame({
+    'applicant_id': [101, 102, 103, 104, 105, 106, 107, 108],
+    'full_name': ['Alice Smith', 'Bob Johnson', 'Carol Lee', 'David Kim', 'Eva Chen', 'Frank Brown', 'Grace Park', 'Henry Adams'],
     'age': [25, 45, 35, 50, 29, 42, 38, 60],
     'income': [50000, 120000, 75000, 130000, 40000, 95000, 80000, 110000],
     'job_type': ['Salaried', 'Self-Employed', 'Unemployed', 'Salaried', 'Salaried', 'Unemployed', 'Self-Employed', 'Salaried'],
@@ -23,7 +25,7 @@ data['job_type_encoded'] = le_job.fit_transform(data['job_type'])
 data['marital_status_encoded'] = le_marital.fit_transform(data['marital_status'])
 data['education_level_encoded'] = le_edu.fit_transform(data['education_level'])
 
-# 3. Define feature set and target
+# 3. Define feature set and target (exclude full_name and applicant_id from features)
 features = ['age', 'income', 'job_type_encoded', 'credit_score', 'marital_status_encoded', 'education_level_encoded']
 X = data[features]
 y = data['approved']
@@ -38,4 +40,7 @@ joblib.dump(le_job, 'jobtype_encoder.pkl')
 joblib.dump(le_marital, 'marital_encoder.pkl')
 joblib.dump(le_edu, 'education_encoder.pkl')
 
-print("✅ Model and encoders saved successfully!")
+# Optionally save the dataset with IDs and names for app use or records
+data.to_csv('loan_data_with_ids.csv', index=False)
+
+print("✅ Model and encoders saved successfully! Dataset with IDs also saved.")

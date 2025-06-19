@@ -23,6 +23,11 @@ st.info("This app uses a machine learning model trained on synthetic data for de
 
 # --- Sidebar for Inputs ---
 st.sidebar.header("Applicant Details")
+
+# New inputs for ID and Full Name
+applicant_id = st.sidebar.text_input("Applicant ID", help="Enter your unique applicant ID")
+full_name = st.sidebar.text_input("Full Name", help="Enter your full name")
+
 age = st.sidebar.slider("Age", 18, 65, 30, help="Applicant's age in years.")
 income = st.sidebar.number_input("Annual Income ($)", min_value=10000, max_value=200000, value=50000, step=1000,
                                   help="Total yearly income before taxes. Cannot be negative.")
@@ -33,6 +38,8 @@ education_level = st.sidebar.selectbox("Level of Education", le_edu.classes_, he
 
 # --- Prepare input ---
 data = {
+    'Applicant ID': applicant_id,
+    'Full Name': full_name,
     'Age': age,
     'Annual Income ($)': income,
     'Job Type': job_type,
@@ -65,6 +72,8 @@ risk_color = '#2ecc40' if risk < 0.4 else '#f1c40f' if risk < 0.7 else '#e74c3c'
 # --- Session State Logging ---
 if 'history' not in st.session_state:
     st.session_state.history = []
+
+# Append current application data (including new fields)
 st.session_state.history.append({**data, 'Approved': approval, 'Confidence': f"{confidence:.2%}"})
 
 # --- Main Output ---
@@ -85,7 +94,7 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
 
-# --- Show input summary ---
+# --- Show input summary including new fields ---
 st.subheader("📄 Your Application Summary")
 st.table(input_df)
 
@@ -102,7 +111,11 @@ st.pyplot(fig)
 with st.expander("ℹ️ About this app"):
     st.write("""
     - This demo uses a Random Forest Classifier trained on synthetic data.
-    - Inputs: Age, Annual Income, Job Type, Credit Score, Marital Status, Level of Education.
+    - Inputs: Applicant ID, Full Name, Age, Annual Income, Job Type, Credit Score, Marital Status, Level of Education.
     - Output: Approval status, confidence, and risk score.
     - For demonstration only; not financial advice.
     """)
+
+# --- Footer ---
+st.markdown("---")
+st.write("© 2023 Rukundo. All rights reserved.")

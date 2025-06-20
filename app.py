@@ -112,4 +112,4 @@ with st.expander("ℹ️ About this app"):
 
 # --- Footer ---
 st.markdown("---")
-st.write("© 2023 Rukundo. All rights reserved.")
+st.write("© 2023 Rukundo Bank. All rights reserved.")
